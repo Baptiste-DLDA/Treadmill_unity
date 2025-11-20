@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class TreadmillsController : MonoBehaviour
 {
@@ -36,11 +37,36 @@ public class TreadmillsController : MonoBehaviour
             t.SetSpeed(speed);
         }
 
-        treadmillMat.SetFloat("_Speed", speed * MATERIAL_SPEED_MULTIPLIER);
+        if (treadmillMat != null)
+            treadmillMat.SetFloat("_Speed", speed * MATERIAL_SPEED_MULTIPLIER);
     }
 
     public void SetPaused(bool value)
     {
         isPaused = value;
+    }
+
+    public void TriggerEmergencyStop(float duration)
+    {
+        if (!isPaused)
+        {
+            StartCoroutine(EmergencyStopRoutine(duration));
+        }
+    }
+
+    IEnumerator EmergencyStopRoutine(float duration)
+    {
+        Debug.Log("ARRET D'URGENCE ACTIVÉ");
+        isPaused = true;
+
+        yield return new WaitForSeconds(duration);
+
+        isPaused = false;
+        Debug.Log("Redémarrage automatique");
+    }
+    public void SetTargetSpeedRatio(float ratio)
+    {
+        // On clamp entre 0 et 1 pour être sûr
+        targetSpeed = Mathf.Clamp01(ratio);
     }
 }
