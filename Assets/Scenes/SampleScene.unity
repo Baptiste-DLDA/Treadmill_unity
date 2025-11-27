@@ -8996,9 +8996,8 @@ MonoBehaviour:
   handle: {fileID: 8522849997336412516}
   treadmillController: {fileID: 333067210}
   rotationAxis: {x: 1, y: 0, z: 0}
-  minAngle: 0
+  minAngle: -90
   maxAngle: 90
-  debugWithMouse: 0
 --- !u!1001 &5809359910869480261
 PrefabInstance:
   m_ObjectHideFlags: 0
