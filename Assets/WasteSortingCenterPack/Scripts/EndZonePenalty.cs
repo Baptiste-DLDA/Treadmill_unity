@@ -1,62 +1,71 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic; // Nécessaire pour la liste de sécurité
+using System.Collections.Generic;
 
 public class EndZonePenalty : MonoBehaviour
 {
-    [Header("Effets")]
+    [Header("Configuration")]
+    [Tooltip("L'effet de feu")]
     public GameObject flameEffectPrefab;
 
-    [Header("UI (Optionnel)")]
-    public Text infoText; // Ou TextMeshProUGUI si tu as changé
+    [Tooltip("L'endroit EXACT où le feu doit apparaître")]
+    public Transform fireSpawnPoint;
 
-    // Sécurité anti-doublon : on garde en mémoire les objets qu'on est en train de détruire
+    [Header("Apparence du Feu")]
+    public Vector3 fireScale = new Vector3(0.5f, 0.5f, 0.5f);
+    [Header("UI (Optionnel)")]
+    public Text infoText;
+
+    // Sécurité anti-doublon
     private List<int> processedObjects = new List<int>();
 
     void OnTriggerEnter(Collider other)
     {
-        // 1. On récupère l'objet racine (au cas où on touche juste le bouchon)
         GameObject obj = other.attachedRigidbody ? other.attachedRigidbody.gameObject : other.gameObject;
         int objectID = obj.GetInstanceID();
 
-        // 2. SÉCURITÉ : Si on a déjà traité cet objet, on arrête tout de suite !
         if (processedObjects.Contains(objectID)) return;
 
         if (IsABottle(obj))
         {
-            // On ajoute l'objet à la liste des traités pour ne pas le recompter
             processedObjects.Add(objectID);
 
-            // 3. Pénalité de Score (on passe la position pour le texte flottant)
             if (ScoreManager.instance != null)
             {
-                // On passe la position de l'objet pour que le -1 apparaisse dessus
                 ScoreManager.instance.AddPoints(-1, obj.transform.position);
             }
 
-            // 4. Message Text (Optionnel)
             if (infoText != null)
             {
                 infoText.text = "Perdu !";
                 Invoke("ClearMessage", 1.0f);
             }
 
-            // 5. Feu
             if (flameEffectPrefab != null)
             {
-                GameObject fire = Instantiate(flameEffectPrefab, transform.position, Quaternion.identity);
+                Vector3 spawnPosition = transform.position;
+                Quaternion spawnRotation = Quaternion.identity;
+
+                // 1. On récupère Position et Rotation du SpawnPoint
+                if (fireSpawnPoint != null)
+                {
+                    spawnPosition = fireSpawnPoint.position;
+                    spawnRotation = fireSpawnPoint.rotation;
+                }
+
+                // 2. On crée le feu
+                GameObject fire = Instantiate(flameEffectPrefab, spawnPosition, spawnRotation);
+
+                // 3. NOUVEAU : On applique la taille personnalisée
+                fire.transform.localScale = fireScale;
+
                 Destroy(fire, 0.5f);
             }
 
-            // 6. Destruction
             Destroy(obj);
-
-            // Nettoyage de la liste de sécurité (pas strictement nécessaire car l'ID meurt avec l'objet, mais propre)
-            // On le laisse dans la liste le temps qu'il soit détruit par Unity
         }
         else
         {
-            // Si c'est un autre débris, on le détruit juste
             Destroy(obj);
         }
     }
