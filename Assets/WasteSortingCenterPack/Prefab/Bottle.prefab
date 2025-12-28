@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5793536256600698435}
   m_Layer: 0
   m_Name: Bottle
-  m_TagString: bottle
+  m_TagString: BouteilleVerte
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8945e5a2cc38e418d2b3c351f9de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 0}
 --- !u!114 &5793536256600698435
 MonoBehaviour:
   m_ObjectHideFlags: 0

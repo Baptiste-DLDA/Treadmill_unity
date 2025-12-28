@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 222771015202221366}
   m_Layer: 0
   m_Name: Carton0
-  m_TagString: Untagged
+  m_TagString: BouteilleBleue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8945e5a2cc38e418d2b3c351f9de55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathEffect: {fileID: 0}
 --- !u!114 &222771015202221366
 MonoBehaviour:
   m_ObjectHideFlags: 0

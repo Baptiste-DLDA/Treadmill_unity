@@ -6,6 +6,9 @@ TagManager:
   tags:
   - destroyer
   - bottle
+  - BouteilleVerte
+  - BouteilleBleue
+  - BouteilleViolette
   layers:
   - Default
   - TransparentFX
