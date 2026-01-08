@@ -16,11 +16,13 @@ public class NPCSequence : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     private bool sequenceStarted = false;
-
-    void Start()
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+    }
+    public void StartWalking()
+    {
 
         // Désactiver la rotation automatique du NavMesh pour la gérer nous-même si besoin, 
         // mais ici on la laisse pour la marche, on la coupera pour le "coucou"

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 44220647234032922}
   - component: {fileID: 4755994900294038716}
   - component: {fileID: 5793536256600698435}
+  - component: {fileID: 8029964559808453546}
   m_Layer: 0
   m_Name: Bottle
   m_TagString: BouteilleVerte
@@ -274,3 +275,15 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 0
+--- !u!114 &8029964559808453546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4844439953306716677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48b7ebc7818c6849b4732ae26a7ea9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
