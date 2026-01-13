@@ -1,15 +1,15 @@
 using UnityEngine;
-using TMPro; // Nécessaire pour le texte
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance; // Singleton pour accès facile
+    public static ScoreManager instance; // Singleton (minuscule)
 
     [Header("UI")]
-    public TextMeshProUGUI scoreText; // Glissez votre texte ici
-    public GameObject minusOnePopupPrefab; // Optionnel : Prefab texte "-1" flottant
+    public TextMeshProUGUI scoreText;
+    public GameObject minusOnePopupPrefab;
 
-    private int score = 0;
+    public int score = 0; // PASSÉ EN PUBLIC pour que le GameManager puisse le lire
 
     void Awake()
     {
@@ -19,10 +19,8 @@ public class ScoreManager : MonoBehaviour
 
     public void AddPoints(int points, Vector3 position = default)
     {
-        // On ajoute les points
         score += points;
 
-        // CORRECTION : Si le score est inférieur à 0, on le remet à 0
         if (score < 0)
         {
             score = 0;
@@ -30,8 +28,6 @@ public class ScoreManager : MonoBehaviour
 
         UpdateScoreUI();
 
-        // Si on perd des points (et que points est négatif), on affiche le popup
-        // On vérifie aussi que position n'est pas (0,0,0) pour éviter de le faire apparaitre au centre du monde
         if (points < 0 && minusOnePopupPrefab != null && position != Vector3.zero)
         {
             Instantiate(minusOnePopupPrefab, position, Quaternion.identity);
@@ -42,5 +38,11 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreText != null)
             scoreText.text = "Score : " + score;
+    }
+
+    public void ResetScore()
+    {
+        score = 0;
+        UpdateScoreUI();
     }
 }

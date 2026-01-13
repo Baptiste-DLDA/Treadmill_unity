@@ -38,6 +38,8 @@ public class NPCSpawner : MonoBehaviour
         {
             script.destinationB = pointIntermediaire;
             script.destinationC = pointFinal;
+
+            script.StartWalking();
         }
     }
 }
