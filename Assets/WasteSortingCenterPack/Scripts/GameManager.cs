@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
         currentTime = duration;
         isGameActive = true;
 
-        // CORRECTION ICI : instance en minuscule
         if (ScoreManager.instance != null) ScoreManager.instance.ResetScore();
 
         if (endGamePanel != null) endGamePanel.SetActive(false);
@@ -89,7 +88,6 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         SetGameComponentsState(false);
 
-        // CORRECTION ICI : instance en minuscule + accès à .score qui est maintenant public
         int currentScore = ScoreManager.instance != null ? ScoreManager.instance.score : 0;
 
         int stars = 0;
@@ -130,7 +128,6 @@ public class GameManager : MonoBehaviour
 
         if (wasteSpawner != null)
         {
-            // CORRECTION ICI : "spawner" (minuscule) au lieu de "Spawn"
             var script = wasteSpawner.GetComponent<Spawner>();
             if (script) script.enabled = state;
         }

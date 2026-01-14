@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NPCBottleHit : MonoBehaviour
 {
     [Header("Configuration")]
-    [Tooltip("Tags des objets considérés comme des bouteilles. Doit correspondre EXACTEMENT aux tags de vos prefabs.")]
+    [Tooltip("Tags des objets considérés comme des bouteilles")]
     public string[] bottleTags = { "BouteilleVerte", "BouteilleBleue", "BouteilleViolette" };
     public float expulsionForce = 5.0f;
     public float upwardForce = 4.0f;
@@ -15,7 +15,7 @@ public class NPCBottleHit : MonoBehaviour
     public int scoreReward = 50;
 
     [Header("Debug")]
-    [Tooltip("Cochez cette case en mode PLAY pour tester l'animation et le score sans lancer de bouteille.")]
+    [Tooltip("si on arrive pas a toucher le bonhomme, on clique la dessus pour tester si ca marche bien")]
     public bool simulerImpact = false;
 
     private bool hasBeenHit = false;
@@ -31,13 +31,11 @@ public class NPCBottleHit : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         npcSequence = GetComponent<NPCSequence>();
 
-        // Sécurité : On s'assure que le RB est Kinematic au début pour que le NavMesh fonctionne
         if (rb != null) rb.isKinematic = true;
     }
 
     void Update()
     {
-        // Permet de tester via l'inspecteur en cochant la case
         if (simulerImpact)
         {
             simulerImpact = false;
@@ -70,36 +68,30 @@ public class NPCBottleHit : MonoBehaviour
         if (hasBeenHit) return;
         hasBeenHit = true;
 
-        // 1. Score
         ScoreManager scoreManager = FindFirstObjectByType<ScoreManager>();
         if (scoreManager != null)
         {
             scoreManager.AddPoints(scoreReward);
         }
 
-        // 2. Désactiver l'IA
         if (agent != null) agent.enabled = false;
         if (npcSequence != null) npcSequence.enabled = false;
 
-        // 3. Physique (Éjection)
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
 
-            // Vecteur : Vers l'arrière + Vers le haut
             Vector3 forceDirection = (-transform.forward + Vector3.up).normalized;
             rb.AddForce(forceDirection * expulsionForce + Vector3.up * upwardForce, ForceMode.Impulse);
         }
 
-        // 4. Animation
         if (animator != null)
         {
             animator.applyRootMotion = false;
             animator.SetTrigger("Hit");
         }
 
-        // 5. Destruction
         Destroy(gameObject, 2.5f);
     }
 }

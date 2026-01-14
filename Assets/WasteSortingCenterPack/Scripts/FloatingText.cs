@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; // Nécessaire pour toucher à la couleur du texte
+using TMPro;
 
 public class FloatingText : MonoBehaviour
 {
@@ -16,14 +16,11 @@ public class FloatingText : MonoBehaviour
 
     void Start()
     {
-        // On récupère le composant texte pour faire un fondu (optionnel)
+        // On récupère le composant texte pour faire un fondu
         textMesh = GetComponent<TextMeshPro>();
         if (textMesh != null) textColor = textMesh.color;
-
-        // On détruit l'objet automatiquement après 'lifeTime' secondes
         Destroy(gameObject, lifeTime);
 
-        // Optionnel : On fait regarder le texte vers le joueur (la caméra)
         if (Camera.main != null)
         {
             transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
@@ -33,10 +30,8 @@ public class FloatingText : MonoBehaviour
 
     void Update()
     {
-        // 1. Faire monter le texte
         transform.position += Vector3.up * moveSpeed * Time.deltaTime;
 
-        // 2. (Optionnel) Faire disparaître le texte progressivement (Fade out)
         if (textMesh != null)
         {
             timer += Time.deltaTime;

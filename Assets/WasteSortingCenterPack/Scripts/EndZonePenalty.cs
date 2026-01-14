@@ -46,17 +46,14 @@ public class EndZonePenalty : MonoBehaviour
                 Vector3 spawnPosition = transform.position;
                 Quaternion spawnRotation = Quaternion.identity;
 
-                // 1. On récupère Position et Rotation du SpawnPoint
                 if (fireSpawnPoint != null)
                 {
                     spawnPosition = fireSpawnPoint.position;
                     spawnRotation = fireSpawnPoint.rotation;
                 }
 
-                // 2. On crée le feu
                 GameObject fire = Instantiate(flameEffectPrefab, spawnPosition, spawnRotation);
 
-                // 3. NOUVEAU : On applique la taille personnalisée
                 fire.transform.localScale = fireScale;
 
                 Destroy(fire, 0.5f);

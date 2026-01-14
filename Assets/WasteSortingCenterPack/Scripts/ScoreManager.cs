@@ -3,13 +3,13 @@ using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance; // Singleton (minuscule)
+    public static ScoreManager instance;
 
     [Header("UI")]
     public TextMeshProUGUI scoreText;
     public GameObject minusOnePopupPrefab;
 
-    public int score = 0; // PASSÉ EN PUBLIC pour que le GameManager puisse le lire
+    public int score = 0;
 
     void Awake()
     {

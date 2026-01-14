@@ -66,7 +66,6 @@ public class TreadmillsController : MonoBehaviour
     }
     public void SetTargetSpeedRatio(float ratio)
     {
-        // On clamp entre 0 et 1 pour être sûr
         targetSpeed = Mathf.Clamp01(ratio);
     }
 }
