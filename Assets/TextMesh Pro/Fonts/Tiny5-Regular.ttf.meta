@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 86ca37617d7fabb4793812992b9e352c
+guid: 0a105c91ca2b9e148910fc97d1ee99bd
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Geostar Fill
+  - Tiny5
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

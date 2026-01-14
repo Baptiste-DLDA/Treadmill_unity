@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
             if (endStarsText != null)
             {
                 string starString = "";
-                for (int i = 0; i < stars; i++) starString += "★ ";
+                for (int i = 0; i < stars; i++) starString += "* ";
                 endStarsText.text = "Étoiles : " + starString;
             }
 
